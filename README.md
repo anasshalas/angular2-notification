@@ -17,6 +17,7 @@ This project was generated with [angular-cli](https://github.com/angular/angular
         "styles.css",
 		"../node_modules/ng2-toastr/bundles/ng2-toastr.min.css"
       ],
+	  
     "scripts": [
 	   "../node_modules/ng2-toastr/bundles/ng2-toastr.min.js"
 	  ]
@@ -72,4 +73,6 @@ This project was generated with [angular-cli](https://github.com/angular/angular
         this.toastr.custom('<span style="color: red">Message in red.</span>', null, {enableHTML: true});
       }
     }
+	
+	
 
