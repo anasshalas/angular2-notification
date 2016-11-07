@@ -1,31 +1,75 @@
-# Notification
+# Notification with Toastr in Angular 2 
+
+ng2-toastr has added animation for displaying/dismissing toasts The lib is inspired by [angular-toastr] (https://github.com/Foxandxss/angular-toastr),
+and will show bootstrap-like toasts.
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.18.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+#Usage
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
+1.	Install ng2-toastr using npm:
+    npm install ng2-toastr –save
 
-## Build
+2.	Include js and css files in angular-cli.json:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+	"styles": [
+        "styles.css",
+		"../node_modules/ng2-toastr/bundles/ng2-toastr.min.css"
+      ],
+    "scripts": [
+	   "../node_modules/ng2-toastr/bundles/ng2-toastr.min.js"
+	  ]
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3.	Add ToastModule into your AppModule class. app.module.ts would look like this:
+    
+    import {NgModule} from '@angular/core';
+    import {BrowserModule} from '@angular/platform-browser';
+    import {AppComponent} from './app.component';
+    import {ToastModule} from 'ng2-toastr/ng2-toastr';
+    
+    @NgModule({
+      imports: [BrowserModule, ToastModule],
+      declarations: [AppComponent],
+      bootstrap: [AppComponent],
+    })
+    export class AppModule {
+    
+    }
 
-## Running end-to-end tests
+4.	Inject 'ToastsManager' class in your component class.
+     
+	import { Component } from '@angular/core';
+    import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+    
+    @Component({
+      selector: 'app-root',
+      template: '<button class="btn btn-default" (click)="showSuccess()">Toastr Tester</button>'
+    })
+    export class AppComponent {
+    
+      constructor(public toastr: ToastsManager) {
+      }
+        
+      showSuccess() {
+        this.toastr.success('You are awesome!', 'Success!');
+      }
+    
+      showError() {
+        this.toastr.error('This is not good!', 'Oops!');
+      }
+    
+      showWarning() {
+        this.toastr.warning('You are being warned.', 'Alert!');
+      }
+    
+      showInfo() {
+        this.toastr.info('Just some information for you.');
+      }
+      
+      showCustom() {
+        this.toastr.custom('<span style="color: red">Message in red.</span>', null, {enableHTML: true});
+      }
+    }
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Deploying to Github Pages
-
-Run `ng github-pages:deploy` to deploy to Github Pages.
-
-## Further help
-
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
